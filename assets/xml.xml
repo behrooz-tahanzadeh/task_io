@@ -1,0 +1,28 @@
+<root>
+	<networks>
+		<network id="main" url="ws://localhost:9090" />
+	</networks>
+
+	<nodes>
+		<node id="kuka_a" network_id="main"/>
+		<node id="kuka_b" network_id="main"/>
+		<node id="kuka_effector_a" network_id="main"/>
+		<node id="kuka_effector_b" network_id="main"/>
+		<node id="drone" network_id="main"/>
+		<node id="drone_magnet" network_id="main"/>
+	</nodes>
+
+	<tasks>
+		<task type="text-to-speech" text="Please check following list."/>
+		<task type="text-to-speech" text="Timelapse camera."/>
+		<task type="text-to-speech" text="Drone battery."/>
+		<task type="text-to-speech" text="Resin and carbon fiber storage."/>
+		<task type="text-to-speech" text="is everything ok?"/>
+		<task type="publish_cmd" node_id="kuka_a" command="984579845" wait_for_done="true" />
+		<task type="publish_cmd" node_id="kuka_effector_b" command="on"/>
+		<task type="publish_cmd" node_id="kuka_effector_b" command="on" wait_for_done="false"/>
+		<task type="sleep" delay_sec="1"/>
+		<task type="text-to-speech" text="is magnet on?"/>
+		<task type="confirm" on_true="1" on_false="-2" message="is it on?"/>
+	</tasks>
+</root>
