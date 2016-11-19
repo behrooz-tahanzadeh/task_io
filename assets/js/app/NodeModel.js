@@ -32,8 +32,11 @@ NodeModel.prototype.prepareTopics = function()
 {
 	if(this.networkModel.isRosConnected)
 	{
-		this.cmdDoTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:"task_io/"+this.id+"/do_cmd" , messageType:'std_msgs/String'});
-		this.cmdProgressTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:"task_io/"+this.id+"/cmd_progress" , messageType:'std_msgs/String'});
+		var p = SettingModel.settingModel.getPublishTopic(this.id);
+		var s = SettingModel.settingModel.getSubscribeTopic(this.id);
+		
+		this.cmdDoTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:p , messageType:'std_msgs/String'});
+		this.cmdProgressTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:s , messageType:'std_msgs/String'});
 		
 		this.cmdDoTopic.advertise();
 		this.cmdProgressTopic.subscribe(this.cmdProgressCb.bind(this));

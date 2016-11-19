@@ -40,11 +40,45 @@ XmlReader.prototype.readerOnLoad = function(e)
 
 XmlReader.prototype.prepare = function()
 {
+	this.prepareTemplates();
+	this.prepareSettings();
 	this.prepareNetworks();
 	this.prepareNodes();
 	this.prepareTasks();
 };
 
+
+
+
+XmlReader.prototype.prepareTemplates = function()
+{
+	var obj = this.jq.find("tasks>task[type=template]");
+	
+	for(var i=0; i<obj.length; ++i)
+	{
+		var template_id = obj.eq(i).attr('template_id');
+		var template = this.jq.find("task_templates>task_template[id="+template_id+"]").get(0).innerHTML;
+		
+		var attributes = obj.get(i).attributes;
+		
+		for(var j=0; j<attributes.length; ++j)
+			template = template.replace("{"+attributes[j].name+"}",attributes[j].value);
+		
+		obj.eq(i).replaceWith(template);
+	}
+};
+
+
+
+
+XmlReader.prototype.prepareSettings = function()
+{
+	var obj = new SettingModel();
+	
+	obj.publishTopicTemplate = this.jq.find("settings>topictemplate>publish").attr("value");
+	obj.subscribeTopicTemplate = this.jq.find("settings>topictemplate>subscribe").attr("value");
+	obj.requestIdLength =  this.jq.find("settings>request_id").attr("length");
+}
 
 
 XmlReader.prototype.prepareNetworks = function()

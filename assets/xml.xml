@@ -1,4 +1,13 @@
 <root>
+	<settings>
+		<topictemplate>
+			<publish value="{node_id}/task_io/goal" />
+			<subscribe value="{node_id}/task_io/feedback" />
+		</topictemplate>
+		
+		<request_id length="6" />
+	</settings>
+
 	<networks>
 		<network id="main" url="ws://localhost:9090" />
 	</networks>
@@ -12,12 +21,25 @@
 		<node id="drone_magnet" network_id="main"/>
 	</nodes>
 
+	<task_templates>
+		<task_template id="say_hello">
+			<task type="text-to-speech" text="Hi {name_1}! How is it going?"/>
+			<task type="text-to-speech" text="You can say ok Tatsou! to start giving me speech command"/>
+			<task type="text-to-speech" text="Moreover you can use arrow keys to navigate through different tasks"/>
+			<task type="text-to-speech" text="in order to define the tasks, open the xml template file comes with package."/>
+			<task type="text-to-speech" text="You can define new items in tasks element of this document"/>
+		</task_template>
+	</task_templates>
+
 	<tasks>
+		<task type="template" template_id="say_hello" name_1="KIKI"/>
+
 		<task type="text-to-speech" text="Please check following list."/>
 		<task type="text-to-speech" text="Timelapse camera."/>
 		<task type="text-to-speech" text="Drone battery."/>
 		<task type="text-to-speech" text="Resin and carbon fiber storage."/>
 		<task type="text-to-speech" text="is everything ok?"/>
+
 		<task type="publish_cmd" node_id="kuka_a" command="984579845" wait_for_done="true" />
 		<task type="publish_cmd" node_id="kuka_effector_b" command="on"/>
 		<task type="publish_cmd" node_id="kuka_effector_b" command="on" wait_for_done="false"/>
