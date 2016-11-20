@@ -93,6 +93,10 @@
 				<label><input type="checkbox" value="" id="runAutomaticallyChb">Run Automatically</label>
 			</div>
 			
+			<div style="margin:20px 0px;">
+				<button type="button" class="btn btn-warning btn-xs" onclick="TaskController.taskController.removeTimestamp()">Remove Timestamp</button>
+			</div>
+			
 			<div id="navButtons" class="btn-group">
 				<button type="button" class="btn btn-default prev" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.prev()">Prev</button>
 				<button type="button" class="btn btn-primary run" onclick="TaskController.taskController.run()">Run</button>

@@ -202,6 +202,13 @@ TaskController.prototype.renderCurrentTaskPanel = function()
 }
 
 
+TaskController.prototype.removeTimestamp = function()
+{
+	var obj = this.xml.eq(this.index);
+	obj.removeAttr("req_timestamp");
+}
+
+
 
 
 
