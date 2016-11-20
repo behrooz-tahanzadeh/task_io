@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="assets/js/lib/signals.min.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" id="main_style_sheet">
 	<link rel="stylesheet" href="assets/css/style.css">
 	
 	<!-- Latest compiled JavaScript -->
@@ -23,15 +23,16 @@
 	<script type="text/javascript" src="assets/js/app/NodeModel.js"></script>
 	<script type="text/javascript" src="assets/js/app/TaskController.js"></script>
 	<script type="text/javascript" src="assets/js/app/SettingModel.js"></script>
+	<script type="text/javascript" src="assets/js/app/Extra.js"></script>
 </head>
 
 
 
-<body>
+<body data-theme="bright">
 
 
 	<div class="col-sm-8">
-		<div>
+		<div id="desc-file">
 			<h2>Description File</h2>
 			<input type="file" onchange="XmlReader.FileOnChange(event)"/>
 		</div>
@@ -80,6 +81,11 @@
 				</tbody>
 		  </table>
 		</div>
+		
+		<div class="btn-group">
+			<button type="button" class="btn btn-default btn-xs dark" onclick="jQuery('body').attr('data-theme', 'dark'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap-darkly.min.css')">Dark Theme</button>
+			<button type="button" class="btn btn-default btn-xs bright" onclick="jQuery('body').attr('data-theme', 'bright'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap.min.css')">Bright Theme</button>
+		</div>
 	</div>
 	
 	
@@ -102,13 +108,23 @@
 				<button type="button" class="btn btn-primary run" onclick="TaskController.taskController.run()">Run</button>
 				<button type="button" class="btn btn-default next" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.next()">Next</button>
 			</div>
-		
-			<hr>
-		
-			<h4>Current Task</h4>
-			<div id="currentTaskPanel"></div>
 		</div>
 		
-	</div>
+		
+		<div class="panel-heading">Current Task</div>
+		<div class="panel-body" id="currentTaskPanel" style="min-height:150px">
+		</div>
+		
+		
+		<div class="panel-heading">Publish Command</div>
+		<div class="panel-body" id="publishCommandPanel">
+				<label>Node:</label>
+				<select class="form-control"></select>
+	  			<br>
+	  			<label style="display:block">Command:<input type="text" class="form-control"></label>
+	  			<button type="button" class="btn btn-warning" onclick="publishCommandPanel_onClick()">Publish</button>
+		</div>
+		
+	</div><!-- End of panel definition -->
 </body>
 </html>

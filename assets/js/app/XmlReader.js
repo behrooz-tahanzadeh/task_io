@@ -12,7 +12,7 @@ XmlReader.FileOnChange = function(e)
 {
 	file = e.target.files[0];
 	if(!file) return;
-	jQuery(e.target).addClass('hide');
+	jQuery("#desc-file").addClass('hide');
 	new XmlReader().read(file);
 };
 
@@ -77,7 +77,7 @@ XmlReader.prototype.prepareSettings = function()
 	
 	obj.publishTopicTemplate = this.jq.find("settings>topictemplate>publish").attr("value");
 	obj.subscribeTopicTemplate = this.jq.find("settings>topictemplate>subscribe").attr("value");
-	obj.requestIdLength =  this.jq.find("settings>request_id").attr("length");
+	obj.requestIdLength =  parseInt(this.jq.find("settings>request_id").attr("length"));
 }
 
 
@@ -122,6 +122,9 @@ XmlReader.prototype.prepareNodes = function()
 		jQuery("div#nodes tbody").append(jq);
 		
 		new NodeModel(i, id, network_id ,jq)
+		
+		//=====
+		jQuery("#publishCommandPanel>select").append("<option>"+id+"</option>");
 	}
 };
 

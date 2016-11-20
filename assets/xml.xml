@@ -34,6 +34,46 @@
 	<tasks>
 		<task type="template" template_id="say_hello" name_1="KIKI"/>
 
+
+		<task type="text-to-speech" text="I used to rule the world"/>
+		<task type="text-to-speech" text="Seas would rise when I gave the word"/>
+		<task type="text-to-speech" text="Now in the morning I sleep alone"/>
+		<task type="text-to-speech" text="Sweep the streets I used to own"/>
+		<task type="text-to-speech" text="I used to roll the dice"/>
+		<task type="text-to-speech" text="Feel the fear in my enemy's eyes"/>
+		<task type="text-to-speech" text="Listen as the crowd would sing"/>
+		<task type="text-to-speech" text="Now the old king is dead! Long live the king!"/>
+		<task type="text-to-speech" text="One minute I held the key"/>
+		<task type="text-to-speech" text="Next the walls were closed on me"/>
+		<task type="text-to-speech" text="And I discovered that my castles stand"/>
+		<task type="text-to-speech" text="Upon pillars of salt and pillars of sand"/>
+		<task type="text-to-speech" text="I hear Jerusalem bells are ringing"/>
+		<task type="text-to-speech" text="Roman Cavalry choirs are singing"/>
+		<task type="text-to-speech" text="Be my mirror, my sword and shield"/>
+		<task type="text-to-speech" text="My missionaries in a foreign field"/>
+
+		<task type="text-to-speech" text="Do not go gentle into that good night."/>
+		<task type="text-to-speech" text="Old age should burn and rave at close of day."/>
+		<task type="text-to-speech" text="Rage, rage against the dying of the light."/>
+		<task type="text-to-speech" text="Though wise men at their end know dark is right."/>
+		<task type="text-to-speech" text="Because their words had forked no lightning the."/>
+		<task type="text-to-speech" text="Do not go gentle into that good night."/>
+		<task type="text-to-speech" text="Good men, the last wave by, crying how bright."/>
+		<task type="text-to-speech" text="Their frail deeds might have danced in a green bay."/>
+		<task type="text-to-speech" text="Rage, rage against the dying of the light."/>
+		<task type="text-to-speech" text="Wild men who caught and sang the sun in flight,"/>
+		<task type="text-to-speech" text="And learn, too late, they grieved it on its way,"/>
+		<task type="text-to-speech" text="Do not go gentle into that good night."/>
+		<task type="text-to-speech" text="Grave men, near death, who see with blinding sight"/>
+		<task type="text-to-speech" text="Blind eyes could blaze like meteors and be gay,"/>
+		<task type="text-to-speech" text="Rage, rage against the dying of the light"/>
+		<task type="text-to-speech" text="And you, my father, there on the sad height,"/>
+		<task type="text-to-speech" text="Curse, bless, me now with your fierce tears, I pray."/>
+		<task type="text-to-speech" text="Do not go gentle into that good night."/>
+		<task type="text-to-speech" text="Rage, rage against the dying of the light."/>
+
+
+
 		<task type="text-to-speech" text="Please check following list."/>
 		<task type="text-to-speech" text="Timelapse camera."/>
 		<task type="text-to-speech" text="Drone battery."/>

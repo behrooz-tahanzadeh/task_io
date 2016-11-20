@@ -18,3 +18,15 @@ SettingModel.prototype.getSubscribeTopic = function(node_id)
 {
 	return this.subscribeTopicTemplate.replace("{node_id}", node_id)
 }
+
+
+SettingModel.prototype.getTimestamp = function()
+{	
+	var d = Date.now();
+	var l = this.requestIdLength
+	
+	console.log(d);
+	
+	return l == undefined ? d : d % Math.pow(10,l+1)
+		
+};

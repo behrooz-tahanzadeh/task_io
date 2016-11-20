@@ -81,21 +81,22 @@ TaskController.prototype.run = function()
 
 TaskController.prototype.runTextToSpeech = function(text)
 {
-	var v = Math.floor(Math.random()*2.4);
+	var v = Math.floor(Math.random()*3);
 	//v = 0;
 	//console.log(v);
 	
 	switch(v)
 	{
 		case 0:
+		case 1:
 			this.SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google UK English Male'; })[0]
 			this.SSU.lang = 'en-GB';
 			break;
-		case 1:
+		case 2:
 			this.SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google UK English Female'; })[0]
 			this.SSU.lang = 'en-GB';
 			break;
-		case 2:
+		case 3:
 			this.SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google US English'; })[0]
 			this.SSU.lang = 'en-US';
 			break;
@@ -133,7 +134,7 @@ TaskController.prototype.runPublishCmd = function(obj)
 	if(wait_for_done)
 	{
 		if(obj.attr("req_timestamp") == undefined)
-			obj.attr("req_timestamp", Date.now());
+			obj.attr("req_timestamp", SettingModel.settingModel.getTimestamp());
 		
 		jQuery("div#tasks tbody>tr.currentTask>td").eq(3).html(obj.attr("req_timestamp"));
 		
@@ -205,66 +206,6 @@ TaskController.prototype.renderCurrentTaskPanel = function()
 TaskController.prototype.removeTimestamp = function()
 {
 	var obj = this.xml.eq(this.index);
+	jQuery("div#tasks tbody>tr:eq("+this.index+")>td:eq(3)").html("__");
 	obj.removeAttr("req_timestamp");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-TaskController.SendOnClick = function(e)
-{
-	var jq = jQuery(e).parents("*[data-template=task]");
-	
-	var n = NodeCtrl.GetById(jq.attr("data-node_id"));
-	
-	if(!jq.attr("data-request_id"))
-		jq.attr("data-request_id", Date.now())
-	
-	var r = jq.attr("data-request_id");
-	
-	jq.find("span.taskRequestId").text(r);
-	
-	var cmd = {};
-	cmd.data = r+":"+jq.attr("data-command");
-	
-	n.CmdDoTopic.publish(new ROSLIB.Message(cmd));
-};
