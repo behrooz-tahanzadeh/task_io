@@ -76,8 +76,27 @@ TaskController.prototype.run = function()
 		case "text-to-speech":
 			this.runTextToSpeech(t.attr("text"));
 			break;
+		case "play_audio":
+			this.runPlayAudio(t.attr("url"), t.attr("wait_for_done"));
+			break;
 	}
 }
+
+TaskController.prototype.runPlayAudio = function(url, wait_for_done)
+{
+	var audio = new Audio(url);
+	if(wait_for_done == 'true')
+	{
+		audio.onended = function(){TaskController.taskController.next();}
+		audio.play();
+	}
+	else
+	{
+		audio.play();
+		this.next();
+	}
+}
+
 
 TaskController.prototype.runTextToSpeech = function(text)
 {
@@ -138,28 +157,28 @@ TaskController.prototype.runPublishCmd = function(obj)
 		
 		jQuery("div#tasks tbody>tr.currentTask>td").eq(3).html(obj.attr("req_timestamp"));
 		
-		command = obj.attr("req_timestamp")+":"+command;
+		command = obj.attr("req_timestamp")+","+command;
 	}
 			
 	
 	var cmd = {};
 	cmd.data = command;
 	
-	node.cmdDoTopic.publish(new ROSLIB.Message(cmd));
+	node.publishTopic.publish(new ROSLIB.Message(cmd));
 	
 	if(!wait_for_done)
 		this.next();
 }
 
 
-TaskController.prototype.cmdProgressCb = function(node, msg)
+TaskController.prototype.subscribeCb = function(node, msg)
 {
 	var obj = this.xml.eq(this.index);
 	var node_id = obj.attr("node_id");
 	var req_timestamp = obj.attr("req_timestamp");
 	
-	var msg_req_timestamp = parseInt(msg.data.split(":")[0]);
-	var msg_progress = parseInt(msg.data.split(":")[1]);
+	var msg_req_timestamp = parseInt(msg.data.split(",")[0]);
+	var msg_progress = parseInt(msg.data.split(",")[1]);
 	
 	if(node_id == node.id && req_timestamp == msg_req_timestamp)
 		if(msg_progress == 100)
@@ -196,7 +215,7 @@ TaskController.prototype.renderNavButtons = function()
 
 TaskController.prototype.renderCurrentTaskPanel = function()
 {
-	var jq = jQuery("div#currentTaskPanel");
+	var jq = jQuery("div#currentTaskPanel>div");
 	jq.html("<b>Number: </b>"+this.index+"<br>"+jQuery("div#tasks tbody>tr.currentTask>td").eq(2).html());
 	
 	return this;

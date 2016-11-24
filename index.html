@@ -10,9 +10,10 @@
 	<script type="text/javascript" src="assets/js/lib/roslib.min.js"></script>
 	<script type="text/javascript" src="assets/js/lib/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript" src="assets/js/lib/signals.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/file-saver.min.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css" id="main_style_sheet">
+	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css" id="main_style_sheet">
 	<link rel="stylesheet" href="assets/css/style.css">
 	
 	<!-- Latest compiled JavaScript -->
@@ -24,11 +25,12 @@
 	<script type="text/javascript" src="assets/js/app/TaskController.js"></script>
 	<script type="text/javascript" src="assets/js/app/SettingModel.js"></script>
 	<script type="text/javascript" src="assets/js/app/Extra.js"></script>
+	<script type="text/javascript" src="assets/js/app/EditorUI.js"></script>
 </head>
 
 
 
-<body data-theme="bright">
+<body data-theme="dark">
 
 
 	<div class="col-sm-8">
@@ -59,7 +61,7 @@
 			
 			<table class="table">
 				<thead>
-					<tr><th>#</th> <th>ID</th> <th>Network ID</th> <th>Status</th></tr>
+					<tr><th>#</th> <th>ID</th> <th>Network ID</th> <th>Publish</th> <th>Subscribe</th> <th>Status</th></tr>
 				</thead>
 				<tbody>
 					
@@ -90,41 +92,68 @@
 	
 	
 	
-	<div class="panel panel-default" data-spy="affix" style="right:10px; width:33%; top:10px" >
-		<div class="panel-heading">Tasks</div>
-		<div class="panel-body">
-			<h4>Navigation</h4>
-			
-			<div class="checkbox">
-				<label><input type="checkbox" value="" id="runAutomaticallyChb">Run Automatically</label>
+	<div class="panel-group" data-spy="affix" style="right:10px; width:33%; top:10px" >
+	
+		<div class="panel panel-default">
+			<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#navigationPanel">
+				Navigation
 			</div>
 			
-			<div style="margin:20px 0px;">
-				<button type="button" class="btn btn-warning btn-xs" onclick="TaskController.taskController.removeTimestamp()">Remove Timestamp</button>
-			</div>
-			
-			<div id="navButtons" class="btn-group">
-				<button type="button" class="btn btn-default prev" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.prev()">Prev</button>
-				<button type="button" class="btn btn-primary run" onclick="TaskController.taskController.run()">Run</button>
-				<button type="button" class="btn btn-default next" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.next()">Next</button>
+			<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="navigationPanel">
+				<div class="checkbox">
+					<label><input type="checkbox" value="" id="runAutomaticallyChb">Run Automatically</label>
+				</div>
+				
+				<div style="margin:20px 0px;">
+					<button type="button" class="btn btn-warning btn-xs" onclick="TaskController.taskController.removeTimestamp()">Remove Timestamp</button>
+				</div>
+				
+				<div id="navButtons" class="btn-group">
+					<button type="button" class="btn btn-default prev" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.prev()">Prev</button>
+					<button type="button" class="btn btn-primary run" onclick="TaskController.taskController.run()">Run</button>
+					<button type="button" class="btn btn-default next" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.next()">Next</button>
+				</div>
 			</div>
 		</div>
 		
-		
-		<div class="panel-heading">Current Task</div>
-		<div class="panel-body" id="currentTaskPanel" style="min-height:150px">
+		<div class="panel panel-default">
+			<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#currentTaskPanel">
+				Current Task
+			</div>
+			
+			<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="currentTaskPanel">
+				<div style="min-height:100px"></div>
+			</div>
+			
 		</div>
 		
-		
-		<div class="panel-heading">Publish Command</div>
-		<div class="panel-body" id="publishCommandPanel">
-				<label>Node:</label>
-				<select class="form-control"></select>
-	  			<br>
-	  			<label style="display:block">Command:<input type="text" class="form-control"></label>
-	  			<button type="button" class="btn btn-warning" onclick="publishCommandPanel_onClick()">Publish</button>
+		<div class="panel panel-default">
+			<div class="panel-heading" data-toggle="collapse" data-target="#publishCommandPanel">
+				Publish Command
+			</div>
+			<div class="panel-body panel-collapse collapse" id="publishCommandPanel">
+					<label>Node:</label>
+					<select class="form-control"></select>
+		  			<br>
+		  			<label style="display:block">Command:<input type="text" class="form-control"></label>
+		  			<button type="button" class="btn btn-warning" onclick="publishCommandPanel_onClick()">Publish</button>
+			</div>
 		</div>
 		
-	</div><!-- End of panel definition -->
+		<div class="panel panel-default">
+			<div class="panel-heading" data-toggle="collapse" data-target="#editorPanel">
+		        Editor
+			</div>
+			<div class="panel-body panel-collapse collapse" id="editorPanel">
+					<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
+					
+					<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
+					<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
+			
+		  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
+			</div>
+		</div>
+		
+	</div><!-- End of panel group  definition -->
 </body>
 </html>

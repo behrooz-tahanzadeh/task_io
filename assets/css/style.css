@@ -32,3 +32,7 @@ body[data-theme=dark] div#tasks tbody>tr.currentTask
 {
 	background-color:#111;
 }
+
+
+[data-toggle=collapse][aria-expanded=true]{cursor: n-resize;}
+[data-toggle=collapse]{cursor: s-resize;}

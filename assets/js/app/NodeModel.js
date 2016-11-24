@@ -1,15 +1,17 @@
-function NodeModel(i, id, network_id ,jq)
+function NodeModel(i, id, network_id, publish, subscribe ,jq)
 {
 	this.i = i;
 	this.id = id;
 	this.network_id = network_id;
 	this.jq = jq;
 	
-	this.cmdProgressTopic = this.cmdDoTopic = undefined;
+	this.publish = publish;
+	this.subscribe = subscribe;
+	
+	this.publishTopic = this.subscribeTopic = undefined;
 	
 	this.networkModel = NetworkModel.GetById(this.network_id);
 	this.networkModel.statusChanged.add(this.prepareTopics.bind(this));
-	
 	
 	NodeModel.List.push(this);
 };
@@ -32,14 +34,19 @@ NodeModel.prototype.prepareTopics = function()
 {
 	if(this.networkModel.isRosConnected)
 	{
-		var p = SettingModel.settingModel.getPublishTopic(this.id);
-		var s = SettingModel.settingModel.getSubscribeTopic(this.id);
+		if(this.publish)	
+		{
+			this.publishTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:this.publish , messageType:'std_msgs/String'});
+			this.publishTopic.advertise();
+			console.info("publish topic has been prepared. Topic: "+this.publish);
+		}
 		
-		this.cmdDoTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:p , messageType:'std_msgs/String'});
-		this.cmdProgressTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:s , messageType:'std_msgs/String'});
-		
-		this.cmdDoTopic.advertise();
-		this.cmdProgressTopic.subscribe(this.cmdProgressCb.bind(this));
+		if(this.subscribe)	
+		{
+			this.subscribeTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:this.subscribe , messageType:'std_msgs/String'});
+			this.subscribeTopic.subscribe(this.subscribeCb.bind(this));
+			console.info("subscribe topic has been prepared. Topic: "+this.subscribe);
+		}
 		
 		this.renderStatus("Ready", "label-success");
 	}
@@ -50,10 +57,10 @@ NodeModel.prototype.prepareTopics = function()
 };
 
 
-NodeModel.prototype.cmdProgressCb = function(msg)
+NodeModel.prototype.subscribeCb = function(msg)
 {
 	console.log(msg);
-	TaskController.taskController.cmdProgressCb(this, msg);
+	TaskController.taskController.subscribeCb(this, msg);
 };
 
 

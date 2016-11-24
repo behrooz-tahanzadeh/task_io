@@ -109,22 +109,27 @@ XmlReader.prototype.prepareNodes = function()
 	
 	for(var i=0; i<obj.length; ++i)
 	{
-		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td></td> </tr>");
+		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>");
 		
 		var id = obj.eq(i).attr("id");
 		var network_id = obj.eq(i).attr("network_id");
+		var publish = obj.eq(i).find("publish").attr("topic");
+		var subscribe = obj.eq(i).find("subscribe").attr("topic");
 		
 		jq.find("td").eq(0).html(i);
 		jq.find("td").eq(1).html(id);
 		jq.find("td").eq(2).html(network_id);
-		jq.find("td").eq(3).html("<span class=\"label label-default status\">not connected</span>");
+		jq.find("td").eq(3).html(publish);
+		jq.find("td").eq(4).html(subscribe);
+		jq.find("td").eq(5).html("<span class=\"label label-default status\">not connected</span>");
 		
 		jQuery("div#nodes tbody").append(jq);
 		
-		new NodeModel(i, id, network_id ,jq)
+		new NodeModel(i, id, network_id, publish, subscribe ,jq)
 		
 		//=====
-		jQuery("#publishCommandPanel>select").append("<option>"+id+"</option>");
+		if(publish)
+			jQuery("#publishCommandPanel>select").append("<option value='"+id+"'>"+id+" ["+publish+"]"+"</option>");
 	}
 };
 
@@ -167,6 +172,12 @@ XmlReader.prototype.prepareTasks = function()
 			case "text-to-speech":
 				jq.find("td").eq(2).html(
 					"<b>text: </b>"+obj.eq(i).attr("text")
+				);
+				break;
+			case "play_audio":
+				jq.find("td").eq(2).html(
+					"<b>url: </b>"+obj.eq(i).attr("url")+"<br>"+
+					"<b>wait_for_done: </b>"+obj.eq(i).attr("wait_for_done")
 				);
 				break;
 		}
