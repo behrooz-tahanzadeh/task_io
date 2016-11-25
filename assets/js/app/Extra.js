@@ -24,3 +24,9 @@ function downloadDescFile_onClick()
 	
 	saveAs(blob, d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"-"+Date.now()+".xml");
 }
+
+function disableAutorun()
+{
+	jQuery('#runAutomaticallyChb').get(0).checked = false;
+	return true;
+}
