@@ -17,11 +17,13 @@
 		<node id="kuka_a" network_id="main">
 			<publish topic="/kuka_a/task_io/goal" />
 			<subscribe topic="/kuka_a/task_io/feedback" />
+			<status topic="/kuka_a/kuka_io/rsi_interface/status" />
 		</node>
 
 		<node id="kuka_b" network_id="main">
 			<publish topic="/kuka_b/task_io/goal" />
 			<subscribe topic="/kuka_b/task_io/feedback" />
+			<status topic="/kuka_b/kuka_io/rsi_interface/status" />
 		</node>
 
 		<node id="kuka_effector_a" network_id="main">

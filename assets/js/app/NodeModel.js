@@ -1,4 +1,4 @@
-function NodeModel(i, id, network_id, publish, subscribe ,jq)
+function NodeModel(i, id, network_id, publish, subscribe, status, jq)
 {
 	this.i = i;
 	this.id = id;
@@ -7,8 +7,10 @@ function NodeModel(i, id, network_id, publish, subscribe ,jq)
 	
 	this.publish = publish;
 	this.subscribe = subscribe;
+	this.status = status;
+	this.statusID = -1;
 	
-	this.publishTopic = this.subscribeTopic = undefined;
+	this.statusTopic = this.publishTopic = this.subscribeTopic = undefined;
 	
 	this.networkModel = NetworkModel.GetById(this.network_id);
 	this.networkModel.statusChanged.add(this.prepareTopics.bind(this));
@@ -48,6 +50,13 @@ NodeModel.prototype.prepareTopics = function()
 			console.info("subscribe topic has been prepared. Topic: "+this.subscribe);
 		}
 		
+		if(this.status)	
+		{
+			this.statusTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:this.status});
+			this.statusTopic.subscribe(this.statusCb.bind(this));
+			console.info("status topic has been prepared. Topic: "+this.status);
+		}
+		
 		this.renderStatus("Ready", "label-success");
 	}
 	else
@@ -61,6 +70,46 @@ NodeModel.prototype.subscribeCb = function(msg)
 {
 	console.log(msg);
 	TaskController.taskController.subscribeCb(this, msg);
+};
+
+NodeModel.prototype.statusCb = function(msg)
+{
+	if(this.statusID == msg.id)
+		return;
+	
+	this.statusID = msg.id;
+	
+	var o = jQuery("<span>"+msg.title+"</span>");
+	o.addClass("label");
+	
+	switch(msg.level)
+	{
+	case 'SUCCESS':
+		o.addClass("label-success");
+		break;
+	case 'INFO':
+		o.addClass("label-primary");
+		break;
+	case 'WARNING':
+		o.addClass("label-warning");
+		break;
+	case 'ERROR':
+		o.addClass("label-danger");
+		break;
+	}
+	
+	this.jq.find("td:eq(2)").html(o);
+	
+	if(msg.level == 'ERROR')
+	{
+		var SSU = new SpeechSynthesisUtterance();
+		SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google UK English Male'; })[0]
+		SSU.lang = 'en-GB';
+		SSU.rate = 1.05;
+		SSU.pitch = 1.25;
+		SSU.text = msg.description;
+		window.speechSynthesis.speak(SSU);
+	}
 };
 
 

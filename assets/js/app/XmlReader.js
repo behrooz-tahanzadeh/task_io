@@ -109,23 +109,26 @@ XmlReader.prototype.prepareNodes = function()
 	
 	for(var i=0; i<obj.length; ++i)
 	{
-		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>");
+		//                       0 #       1 ID    2 Status   3 NeID    4 Pub     5 Sub    6 NetStatus
+		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> </tr>");
 		
 		var id = obj.eq(i).attr("id");
 		var network_id = obj.eq(i).attr("network_id");
 		var publish = obj.eq(i).find("publish").attr("topic");
 		var subscribe = obj.eq(i).find("subscribe").attr("topic");
+		var status = obj.eq(i).find("status").attr("topic");
 		
 		jq.find("td").eq(0).html(i);
 		jq.find("td").eq(1).html(id);
-		jq.find("td").eq(2).html(network_id);
-		jq.find("td").eq(3).html(publish);
-		jq.find("td").eq(4).html(subscribe);
-		jq.find("td").eq(5).html("<span class=\"label label-default status\">not connected</span>");
+		jq.find("td").eq(2).html("_");
+		jq.find("td").eq(3).html(network_id);
+		jq.find("td").eq(4).html(publish);
+		jq.find("td").eq(5).html(subscribe);
+		jq.find("td").eq(6).html("<span class=\"label label-default status\">not connected</span>");
 		
 		jQuery("div#nodes tbody").append(jq);
 		
-		new NodeModel(i, id, network_id, publish, subscribe ,jq)
+		new NodeModel(i, id, network_id, publish, subscribe, status ,jq)
 		
 		//=====
 		if(publish)
