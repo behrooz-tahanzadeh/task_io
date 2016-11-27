@@ -100,16 +100,37 @@ NodeModel.prototype.statusCb = function(msg)
 	
 	this.jq.find("td:eq(2)").html(o);
 	
-	if(msg.level == 'ERROR')
-	{
+	//if(msg.level == 'ERROR')
+	//{
 		var SSU = new SpeechSynthesisUtterance();
 		SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google UK English Male'; })[0]
 		SSU.lang = 'en-GB';
-		SSU.rate = 1.05;
-		SSU.pitch = 1.25;
+		SSU.rate = 1.1;
+		SSU.pitch = 1.1;
+		
+		var v = Math.floor(Math.random()*3);
+		
+		switch(v)
+		{
+			case 0:
+			case 1:
+				SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google UK English Male'; })[0]
+				SSU.lang = 'en-GB';
+				break;
+			case 2:
+				SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google UK English Female'; })[0]
+				SSU.lang = 'en-GB';
+				break;
+			case 3:
+				SSU.voice = speechSynthesis.getVoices().filter(function(voice) {return voice.name == 'Google US English'; })[0]
+				SSU.lang = 'en-US';
+				break;
+		}
+		
+		
 		SSU.text = msg.description;
 		window.speechSynthesis.speak(SSU);
-	}
+	//}
 };
 
 

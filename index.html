@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="assets/js/lib/roslib.min.js"></script>
 	<script type="text/javascript" src="assets/js/lib/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript" src="assets/js/lib/signals.min.js"></script>
-	<script type="text/javascript" src="assets/js/lib/file-saver.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/annyang.min.js"></script>
 	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css" id="main_style_sheet">
@@ -27,6 +27,13 @@
 	<script type="text/javascript" src="assets/js/app/Extra.js"></script>
 	<script type="text/javascript" src="assets/js/app/EditorUI.js"></script>
 	<script type="text/javascript" src="assets/js/app/KeyboardHandler.js"></script>
+	
+	<script>
+	function helloFunction(){console.log(1)}
+	var commands2 = {'hi .*?': helloFunction};
+	annyang.init(commands2, true);
+	annyang.start();
+	</script>
 </head>
 
 
