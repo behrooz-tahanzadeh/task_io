@@ -35,9 +35,11 @@
 
 
 	<div class="col-sm-8">
-		<div id="desc-file">
+		<div id="desc-file" class="well well-sm">
 			<h2>Description File</h2>
+			<p>This file should contains all of the network and nodes configurations. The task list can be updated later separately.</p>
 			<input type="file" onchange="XmlReader.FileOnChange(event)"/>
+			<button type="button" class="btn btn-warning btn-xs hide" onclick="XmlReader.xmlReader.onlyTasks = true; XmlReader.xmlReader.read();">Update</button>
 		</div>
 	
 	
@@ -145,13 +147,15 @@
 			<div class="panel-heading" data-toggle="collapse" data-target="#editorPanel">
 		        Editor
 			</div>
-			<div class="panel-body panel-collapse collapse" id="editorPanel">
+			<div class="panel-body panel-collapse" id="editorPanel">
 					<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
 					
 					<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
 					<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
 			
 		  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
+		  			
+		  			<hr>
 			</div>
 		</div>
 		

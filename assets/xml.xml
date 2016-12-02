@@ -62,7 +62,10 @@
 
 	<tasks>
 		<task type="play_audio" url="assets/mp3/beep.mp3" wait_for_done="true"/>
+
+
 		<task type="play_audio" url="assets/mp3/error.mp3" wait_for_done="false"/>
+
 		<task type="play_audio" url="assets/mp3/warning.mp3"/>
 		<task type="publish_cmd" node_id="kuka_a" command="984579845" wait_for_done="true" />
 		<task type="publish_cmd" node_id="kuka_effector_b" command="on"/>

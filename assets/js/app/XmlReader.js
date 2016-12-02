@@ -2,7 +2,8 @@ function XmlReader()
 {
 	this.xml = undefined;
 	this.jq = undefined;
-	
+	this.onlyTasks = false;
+	this.file = undefined;
 	XmlReader.xmlReader = this;
 }
 
@@ -12,17 +13,27 @@ XmlReader.FileOnChange = function(e)
 {
 	file = e.target.files[0];
 	if(!file) return;
-	jQuery("#desc-file").addClass('hide');
-	new XmlReader().read(file);
+	
+	jQuery("#desc-file input[type=file]").addClass('hide');
+	jQuery("#desc-file button").removeClass('hide');
+	
+	if(XmlReader.xmlReader)
+		XmlReader.xmlReader.onlyTasks = true;
+	else
+		new XmlReader();
+	
+	XmlReader.xmlReader.file = file;
+	
+	XmlReader.xmlReader.read();
 };
 
 
 
-XmlReader.prototype.read = function(file)
+XmlReader.prototype.read = function()
 {
 	var reader = new FileReader();
 	reader.onload = this.readerOnLoad.bind(this);
-	reader.readAsText(file);
+	reader.readAsText(this.file);
 };
 
 
@@ -41,9 +52,14 @@ XmlReader.prototype.readerOnLoad = function(e)
 XmlReader.prototype.prepare = function()
 {
 	this.prepareTemplates();
-	this.prepareSettings();
-	this.prepareNetworks();
-	this.prepareNodes();
+	
+	if(!this.onlyTasks)
+	{
+		this.prepareSettings();
+		this.prepareNetworks();
+		this.prepareNodes();
+	}
+	
 	this.prepareTasks();
 };
 
@@ -140,6 +156,8 @@ XmlReader.prototype.prepareNodes = function()
 
 XmlReader.prototype.prepareTasks = function()
 {
+	jQuery("div#tasks tbody").empty();
+	
 	new TaskController();
 	
 	obj = this.jq.find("tasks>task");
