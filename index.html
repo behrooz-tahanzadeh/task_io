@@ -11,6 +11,8 @@
 	<script type="text/javascript" src="assets/js/lib/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript" src="assets/js/lib/signals.min.js"></script>
 	<script type="text/javascript" src="assets/js/lib/annyang.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/file-saver.min.js"></script>
+
 	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css" id="main_style_sheet">
@@ -22,11 +24,22 @@
 	<script type="text/javascript" src="assets/js/app/XmlReader.js"></script>
 	<script type="text/javascript" src="assets/js/app/NetworkModel.js"></script>
 	<script type="text/javascript" src="assets/js/app/NodeModel.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController.js"></script>
 	<script type="text/javascript" src="assets/js/app/SettingModel.js"></script>
 	<script type="text/javascript" src="assets/js/app/Extra.js"></script>
 	<script type="text/javascript" src="assets/js/app/EditorUI.js"></script>
 	<script type="text/javascript" src="assets/js/app/KeyboardHandler.js"></script>
+
+	<script type="text/javascript" src="assets/js/app/TaskController.js"></script>
+	<script type="text/javascript" src="assets/js/app/TaskController/TimerTaskController.js"></script>
+	<script type="text/javascript" src="assets/js/app/TaskController/ConfirmTaskController.js"></script>
+	<script type="text/javascript" src="assets/js/app/TaskController/SleepTaskController.js"></script>
+	<script type="text/javascript" src="assets/js/app/TaskController/PlayAudioTaskController.js"></script>
+	<script type="text/javascript" src="assets/js/app/TaskController/TextToSpeechTaskController.js"></script>
+	<script type="text/javascript" src="assets/js/app/TaskController/PublishCmdTaskController.js"></script>
+	
+	<script type="text/javascript" src="assets/js/app/Renderer/TaskRenderer.js"></script>
+	
+	
 </head>
 
 
@@ -76,10 +89,12 @@
 		<div id="tasks" class="well well-sm">
 			<h2>Tasks</h2>
 			<p>Main tasks descriptions.</p>
-			
+
+			<p><button type="button" class="btn btn-warning btn-xs" onclick="jQuery('#tasks table').toggleClass('hide-detail')">Toggle Details</button></p>
+
 			<table class="table">
 				<thead>
-					<tr><th>#</th> <th>Type</th> <th>Param</th> <th>Req. Timestamp</th> </tr>
+					<tr><th>#</th> <th>Type</th> <th>Title</th> <th class="detail">Param</th> <th class="detail">Generated</th> </tr>
 				</thead>
 				<tbody>
 					

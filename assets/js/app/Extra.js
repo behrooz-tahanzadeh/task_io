@@ -20,7 +20,7 @@ function downloadDescFile_onClick()
 	var blobArr = [new XMLSerializer().serializeToString(XmlReader.xmlReader.jq.get(0))];
 	var blob = new Blob(blobArr, {type: "text/plain;charset=utf-8"});
 	
-	var d = new Date()
+	var d = new Date();
 	
 	saveAs(blob, d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate()+"-"+Date.now()+".xml");
 }

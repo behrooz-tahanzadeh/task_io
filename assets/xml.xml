@@ -42,6 +42,10 @@
 		<node id="drone_magnet" network_id="main">
 			<publish topic="/drone_magnet/serial_io/write" />
 		</node>
+
+		<node id="tension_mechanism" network_id="main">
+			<publish topic="/tension_mechanism/msg_to_tm" />
+		</node>
 	</nodes>
 
 
@@ -49,11 +53,7 @@
 
 	<task_templates>
 		<task_template id="say_hello">
-			<task type="text-to-speech" text="Hi {name_1}! How is it going?"/>
-			<task type="text-to-speech" text="You can say ok Tatsou! to start giving me speech command"/>
-			<task type="text-to-speech" text="Moreover you can use arrow keys to navigate through different tasks"/>
-			<task type="text-to-speech" text="in order to define the tasks, open the xml template file comes with package."/>
-			<task type="text-to-speech" text="You can define new items in tasks element of this document"/>
+			<task type="text_to_speech" text="Hi {name_1}! How is it going?"/>
 		</task_template>
 	</task_templates>
 
@@ -61,17 +61,26 @@
 
 
 	<tasks>
-		<task type="play_audio" url="assets/mp3/beep.mp3" wait_for_done="true"/>
 
+		<task type="sleep" title="sleep for 2 seconds">
+			<param delay_sec="2" />
+		</task>
 
-		<task type="play_audio" url="assets/mp3/error.mp3" wait_for_done="false"/>
+		<task type="confirm" title="confirm openning gripper?"> 
+			<param on_true="1" on_false="0" message="Hello world?" />
+		</task>
 
-		<task type="play_audio" url="assets/mp3/warning.mp3"/>
-		<task type="publish_cmd" node_id="kuka_a" command="984579845" wait_for_done="true" />
-		<task type="publish_cmd" node_id="kuka_effector_b" command="on"/>
-		<task type="publish_cmd" node_id="kuka_effector_b" command="on" wait_for_done="false"/>
-		<task type="sleep" delay_sec="1"/>
-		<task type="text-to-speech" text="is magnet on?"/>
-		<task type="confirm" on_true="1" on_false="-2" message="is it on?"/>
+		<task type="text_to_speech" title="saying can I open the gripper or not?">
+			<param text="You can say ok Tatsou! to start giving me speech command"/>
+		</task>
+
+		<task type="publish_cmd" title="publish command 10 to KUKA A ">
+			<param node_id="kuka_a" wait_for="{ts},100" command="{ts},w,8,10"/>
+		</task>
+
+		<task type="play_audio" title="play warning sound">
+			<param url="assets/mp3/warning.mp3"/>
+		</task>
+
 	</tasks>
 </root>

@@ -23,7 +23,7 @@ body[data-theme=dark] table.table
 	background-color:rgba(255,255,255,0.1);
 }
 
-body[data-theme=dark] div#tasks tbody>tr:hover
+body[data-theme=dark] tbody>tr:hover
 {
 	background-color:#333;
 }
@@ -31,6 +31,16 @@ body[data-theme=dark] div#tasks tbody>tr:hover
 body[data-theme=dark] div#tasks tbody>tr.currentTask
 {
 	background-color:#111;
+}
+
+body[data-theme=dark] tbody>tr>td
+{
+	border-top: 1px solid #333;
+}
+
+table.hide-detail .detail
+{
+	display:none;
 }
 
 

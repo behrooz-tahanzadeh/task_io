@@ -164,48 +164,12 @@ XmlReader.prototype.prepareTasks = function()
 	
 	for(var i=0; i<obj.length; ++i)
 	{
-		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td></td> </tr>");
+		//                    0 #       1 Type    2 Title   3 Param                  4 Generated
+		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td class='detail'></td> <td class='detail'></td> </tr>");
 
-		jq.find("td").eq(0).html(i);
-		jq.find("td").eq(1).html(obj.eq(i).attr("type"));
-		
-		switch(obj.eq(i).attr("type"))
-		{
-			case "publish_cmd":
-				jq.find("td").eq(2).html(
-					"<b>node_id: </b>"+obj.eq(i).attr("node_id")+"<br>"+
-					"<b>command: </b>"+obj.eq(i).attr("command")+"<br>"+
-					"<b>wait_for_done: </b>"+obj.eq(i).attr("wait_for_done")
-				);
-				break;
-			case "sleep":
-				jq.find("td").eq(2).html(
-					"<b>delay_sec: </b>"+obj.eq(i).attr("delay_sec")
-				);
-				break;
-			case "confirm":
-				jq.find("td").eq(2).html(
-					"<b>message: </b>"+obj.eq(i).attr("message")+"<br>"+
-					"<b>on_true: </b>"+obj.eq(i).attr("on_true")+"<br>"+
-					"<b>on_false: </b>"+obj.eq(i).attr("on_false")
-				);
-				break;
-			case "text-to-speech":
-				jq.find("td").eq(2).html(
-					"<b>text: </b>"+obj.eq(i).attr("text")
-				);
-				break;
-			case "play_audio":
-				jq.find("td").eq(2).html(
-					"<b>url: </b>"+obj.eq(i).attr("url")+"<br>"+
-					"<b>wait_for_done: </b>"+obj.eq(i).attr("wait_for_done")
-				);
-				break;
-		}
-		
-		jq.find("td").eq(3).html("__");
-		
 		jq.attr("ondblclick", "jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.setIndex("+i+")")
 		jQuery("div#tasks tbody").append(jq);
+
+		TaskRenderer.Index(i);
 	}
 };
