@@ -1,0 +1,48 @@
+div#tasks tbody>tr
+{
+	cursor:pointer;
+}
+
+body[data-theme=bright] table.table
+{
+	background-color:rgba(255,255,255,0.5);
+}
+
+body[data-theme=bright] div#tasks tbody>tr:hover
+{
+	background-color:#f5f5f5;
+}
+
+body[data-theme=bright] div#tasks tbody>tr.currentTask
+{
+	background-color:#d9edf7;
+}
+
+body[data-theme=dark] table.table
+{
+	background-color:rgba(255,255,255,0.1);
+}
+
+body[data-theme=dark] tbody>tr:hover
+{
+	background-color:#333;
+}
+
+body[data-theme=dark] div#tasks tbody>tr.currentTask
+{
+	background-color:#111;
+}
+
+body[data-theme=dark] tbody>tr>td
+{
+	border-top: 1px solid #333;
+}
+
+table.hide-detail .detail
+{
+	display:none;
+}
+
+
+[data-toggle=collapse][aria-expanded=true]{cursor: n-resize;}
+[data-toggle=collapse]{cursor: s-resize;}

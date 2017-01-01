@@ -1,0 +1,15 @@
+<div id="tasks" class="well well-sm">
+	<h2>Tasks</h2>
+	<p>Main tasks descriptions.</p>
+
+	<p><button type="button" class="btn btn-warning btn-xs" onclick="jQuery('#tasks table').toggleClass('hide-detail')">Toggle Details</button></p>
+
+	<table class="table">
+		<thead>
+			<tr><th>#</th> <th>Type</th> <th>Title</th> <th class="detail">Param</th> <th class="detail">Generated</th> </tr>
+		</thead>
+		<tbody ondblclick="TasksList.onDbClick(event)">
+			
+		</tbody>
+	</table>
+</div>

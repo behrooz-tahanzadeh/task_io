@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#navigationPanel">
+		Navigation
+	</div>
+	
+	<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="navigationPanel">
+		<div class="checkbox">
+			<label><input type="checkbox" value="" id="runAutomaticallyChb">Run Automatically</label>
+		</div>
+		
+		<div style="margin:20px 0px;">
+			<button type="button" class="btn btn-warning btn-xs" onclick="NavigationPanel.removeGeneratedOnClick()">Remove Timestamp</button>
+		</div>
+		
+		<div id="navButtons" class="btn-group">
+			<button type="button" class="btn btn-default prev" onclick="NavigationPanel.prevOnClick()">Prev</button>
+			<button type="button" class="btn btn-primary run" onclick="NavigationPanel.runOnClick()">Run</button>
+			<button type="button" class="btn btn-default next" onclick="NavigationPanel.nextOnClick()">Next</button>
+		</div>
+	</div>
+</div>

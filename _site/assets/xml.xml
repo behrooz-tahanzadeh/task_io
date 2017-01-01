@@ -1,0 +1,86 @@
+<root>
+	<settings>
+		<request_id length="6" />
+	</settings>
+
+
+
+
+	<networks>
+		<network id="main" url="ws://localhost:9090" />
+	</networks>
+
+
+
+
+	<nodes>
+		<node id="kuka_a" network_id="main">
+			<publish topic="/kuka_a/task_io/goal" />
+			<subscribe topic="/kuka_a/task_io/feedback" />
+			<status topic="/kuka_a/kuka_io/rsi_interface/status" />
+		</node>
+
+		<node id="kuka_b" network_id="main">
+			<publish topic="/kuka_b/task_io/goal" />
+			<subscribe topic="/kuka_b/task_io/feedback" />
+			<status topic="/kuka_b/kuka_io/rsi_interface/status" />
+		</node>
+
+		<node id="kuka_effector_a" network_id="main">
+			<publish topic="/kuka_a/effector_io/serial_interface/write_to_serial" />
+		</node>
+
+		<node id="kuka_effector_b" network_id="main">
+			<publish topic="/kuka_a/effector_io/serial_interface/write_to_serial" />
+		</node>
+
+		<node id="drone" network_id="main">
+			<publish topic="/drone/task_io/goal" />
+			<subscribe topic="/drone/task_io/feedback" />
+		</node>
+
+		<node id="drone_magnet" network_id="main">
+			<publish topic="/drone_magnet/serial_io/write" />
+		</node>
+
+		<node id="tension_mechanism" network_id="main">
+			<publish topic="/tension_mechanism/msg_to_tm" />
+		</node>
+	</nodes>
+
+
+
+
+	<task_templates>
+		<task_template id="say_hello">
+			<task type="text_to_speech" text="Hi {name_1}! How is it going?"/>
+		</task_template>
+	</task_templates>
+
+
+
+
+	<tasks>
+
+		<task type="sleep" title="sleep for 2 seconds">
+			<param delay_sec="2" />
+		</task>
+
+		<task type="confirm" title="confirm openning gripper?"> 
+			<param on_true="1" on_false="0" message="Hello world?" />
+		</task>
+
+		<task type="text_to_speech" title="saying can I open the gripper or not?">
+			<param text="You can say ok Tatsou! to start giving me speech command"/>
+		</task>
+
+		<task type="publish_cmd" title="publish command 10 to KUKA A ">
+			<param node_id="kuka_a" wait_for="{ts},100" command="{ts},w,8,10"/>
+		</task>
+
+		<task type="play_audio" title="play warning sound">
+			<param url="assets/mp3/warning.mp3"/>
+		</task>
+
+	</tasks>
+</root>

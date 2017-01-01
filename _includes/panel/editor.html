@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" data-target="#editorPanel">
+        Editor
+	</div>
+	<div class="panel-body panel-collapse" id="editorPanel">
+			<label>Type:</label>
+			<select class="form-control" onchange="EditorPanel.typeOnChange()" id="editorPanel_type">
+				<option value="publish_cmd">publish_cmd</option>
+				<option value="sleep">sleep</option>
+				<option value="confirm">confirm</option>
+				<option value="play_audio">play_audio</option>
+				<option value="text_to_speech">text_to_speech</option>
+			</select>
+
+			<div class="editors">
+				<div id="editorPanel_editors_publish_cmd" class="hide">
+					<label style="display:block">node_id:<input type="text" class="form-control" name="node_id"></label>
+					<label style="display:block">wait_for:<input type="text" class="form-control" name="wait_for"></label>
+					<label style="display:block">command:<input type="text" class="form-control" name="command"></label>
+				</div>
+
+				<div id="editorPanel_editors_sleep" class="hide">
+					<label style="display:block">delay_sec:<input type="text" class="form-control" name="delay_sec"></label>
+				</div>
+
+				<div id="editorPanel_editors_confirm" class="hide">
+					<label style="display:block">on_true:<input type="number" class="form-control" name="on_true"></label>
+					<label style="display:block">on_false:<input type="number" class="form-control" name="on_false"></label>
+					<label style="display:block">message:<input type="text" class="form-control" name="message"></label>
+				</div>
+
+				<div id="editorPanel_editors_play_audio" class="hide">
+					<label style="display:block">url:<input type="text" class="form-control" name="url"></label>
+				</div>
+
+				<div id="editorPanel_editors_text_to_speech" class="hide">
+					<label style="display:block">text:<input type="text" class="form-control" name="text"></label>
+				</div>
+			</div>
+
+			<hr>
+			<button type="button" class="btn btn-default" onclick="EditorPanel.addNew()">Add New</button>
+
+			<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
+			
+			<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
+			<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
+	
+  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
+	</div>
+</div>

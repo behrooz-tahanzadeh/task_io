@@ -1,179 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Task IO</title>
+---
+layout: default
+---
+<div class="col-sm-8">
+	{% include list/fileLoader.html %}
+	{% include list/networks.html %}
+	{% include list/nodes.html %}
+	{% include list/tasks.html %}
 
-	<script type="text/javascript" src="assets/js/lib/eventemitter2.min.js"></script>
-	<script type="text/javascript" src="assets/js/lib/roslib.min.js"></script>
-	<script type="text/javascript" src="assets/js/lib/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="assets/js/lib/signals.min.js"></script>
-	<script type="text/javascript" src="assets/js/lib/annyang.min.js"></script>
-	<script type="text/javascript" src="assets/js/lib/file-saver.min.js"></script>
-
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css" id="main_style_sheet">
-	<link rel="stylesheet" href="assets/css/style.css">
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="assets/js/lib/bootstrap.min.js"></script>
-	
-	<script type="text/javascript" src="assets/js/app/XmlReader.js"></script>
-	<script type="text/javascript" src="assets/js/app/NetworkModel.js"></script>
-	<script type="text/javascript" src="assets/js/app/NodeModel.js"></script>
-	<script type="text/javascript" src="assets/js/app/SettingModel.js"></script>
-	<script type="text/javascript" src="assets/js/app/Extra.js"></script>
-	<script type="text/javascript" src="assets/js/app/EditorUI.js"></script>
-	<script type="text/javascript" src="assets/js/app/KeyboardHandler.js"></script>
-
-	<script type="text/javascript" src="assets/js/app/TaskController.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController/TimerTaskController.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController/ConfirmTaskController.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController/SleepTaskController.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController/PlayAudioTaskController.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController/TextToSpeechTaskController.js"></script>
-	<script type="text/javascript" src="assets/js/app/TaskController/PublishCmdTaskController.js"></script>
-	
-	<script type="text/javascript" src="assets/js/app/Renderer/TaskRenderer.js"></script>
-	
-	
-</head>
-
-
-
-<body data-theme="dark">
-
-
-	<div class="col-sm-8">
-		<div id="desc-file" class="well well-sm">
-			<h2>Description File</h2>
-			<p>This file should contains all of the network and nodes configurations. The task list can be updated later separately.</p>
-			<input type="file" onchange="XmlReader.FileOnChange(event)"/>
-			<button type="button" class="btn btn-warning btn-xs hide" onclick="XmlReader.xmlReader.onlyTasks = true; XmlReader.xmlReader.read();">Update</button>
-		</div>
-	
-	
-		<div id="networks" class="well well-sm">
-			<h2>Networks</h2>
-			<p>This section contains informations of rosbridge netowrk.</p>
-			
-			<table class="table">
-				<thead>
-					<tr><th>#</th> <th>ID</th> <th>URL</th> <th>Status</th></tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-		  </table>
-		</div>
-		
-		
-		<div id="nodes" class="well well-sm">
-			<h2>Nodes</h2>
-			<p>Running target nodes are described here. Each node has its own <code>publish</code> and <code>subscribe</code> topics in ros.</p>
-			
-			<table class="table">
-				<thead>
-					<tr><th>#</th> <th>ID</th> <th>Status</th> <th>Network ID</th> <th>Publish</th> <th>Subscribe</th> <th>Network Status</th></tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-		  </table>
-		</div>
-		
-		
-		<div id="tasks" class="well well-sm">
-			<h2>Tasks</h2>
-			<p>Main tasks descriptions.</p>
-
-			<p><button type="button" class="btn btn-warning btn-xs" onclick="jQuery('#tasks table').toggleClass('hide-detail')">Toggle Details</button></p>
-
-			<table class="table">
-				<thead>
-					<tr><th>#</th> <th>Type</th> <th>Title</th> <th class="detail">Param</th> <th class="detail">Generated</th> </tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-		  </table>
-		</div>
-		
-		<div class="btn-group">
-			<button type="button" class="btn btn-default btn-xs dark" onclick="jQuery('body').attr('data-theme', 'dark'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap-darkly.min.css')">Dark Theme</button>
-			<button type="button" class="btn btn-default btn-xs bright" onclick="jQuery('body').attr('data-theme', 'bright'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap.min.css')">Bright Theme</button>
-		</div>
+	<div class="btn-group">
+		<button type="button" class="btn btn-default btn-xs dark" onclick="jQuery('body').attr('data-theme', 'dark'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap-darkly.min.css')">Dark Theme</button>
+		<button type="button" class="btn btn-default btn-xs bright" onclick="jQuery('body').attr('data-theme', 'bright'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap.min.css')">Bright Theme</button>
 	</div>
+</div>
 	
+<div class="panel-group" data-spy="affix" style="right:10px; width:33%; top:10px" >
+
+	{% include panel/navigation.html %}
+	{% include panel/currentTask.html %}
+	{% include panel/publishCommand.html %}
+	{% include panel/editor.html %}
 	
-	
-	<div class="panel-group" data-spy="affix" style="right:10px; width:33%; top:10px" >
-	
-		<div class="panel panel-default">
-			<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#navigationPanel">
-				Navigation
-			</div>
-			
-			<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="navigationPanel">
-				<div class="checkbox">
-					<label><input type="checkbox" value="" id="runAutomaticallyChb">Run Automatically</label>
-				</div>
-				
-				<div style="margin:20px 0px;">
-					<button type="button" class="btn btn-warning btn-xs" onclick="TaskController.taskController.removeTimestamp()">Remove Timestamp</button>
-				</div>
-				
-				<div id="navButtons" class="btn-group">
-					<button type="button" class="btn btn-default prev" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.prev()">Prev</button>
-					<button type="button" class="btn btn-primary run" onclick="TaskController.taskController.run()">Run</button>
-					<button type="button" class="btn btn-default next" onclick="jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.next()">Next</button>
-				</div>
-			</div>
-		</div>
-		
-		<div class="panel panel-default">
-			<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#currentTaskPanel">
-				Current Task
-			</div>
-			
-			<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="currentTaskPanel">
-				<div style="min-height:100px"></div>
-			</div>
-			
-		</div>
-		
-		<div class="panel panel-default">
-			<div class="panel-heading" data-toggle="collapse" data-target="#publishCommandPanel">
-				Publish Command
-			</div>
-			<div class="panel-body panel-collapse collapse" id="publishCommandPanel">
-					<label>Node:</label>
-					<select class="form-control"></select>
-		  			<br>
-		  			<label style="display:block">Command:<input type="text" class="form-control"></label>
-		  			<button type="button" class="btn btn-warning" onclick="publishCommandPanel_onClick()">Publish</button>
-			</div>
-		</div>
-		
-		<div class="panel panel-default">
-			<div class="panel-heading" data-toggle="collapse" data-target="#editorPanel">
-		        Editor
-			</div>
-			<div class="panel-body panel-collapse" id="editorPanel">
-					<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
-					
-					<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
-					<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
-			
-		  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
-		  			
-		  			<hr>
-			</div>
-		</div>
-		
-	</div><!-- End of panel group  definition -->
-</body>
-</html>
+</div>

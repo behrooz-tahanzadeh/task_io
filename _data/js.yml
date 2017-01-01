@@ -1,0 +1,30 @@
+- src: "assets/js/lib/eventemitter2.min.js"
+- src: "assets/js/lib/roslib.min.js"
+- src: "assets/js/lib/jquery-2.2.3.min.js"
+- src: "assets/js/lib/signals.min.js"
+- src: "assets/js/lib/annyang.min.js"
+- src: "assets/js/lib/file-saver.min.js"
+- src: "assets/js/lib/bootstrap.min.js"
+
+- src: "assets/js/app/model/TaskModel.js"
+- src: "assets/js/app/model/NetworkModel.js"
+- src: "assets/js/app/model/NodeModel.js"
+- src: "assets/js/app/model/SettingModel.js"
+
+- src: "assets/js/app/ui/list/TasksList.js"
+- src: "assets/js/app/ui/list/FileLoaderList.js"
+
+- src: "assets/js/app/ui/panel/EditorPanel.js"
+- src: "assets/js/app/ui/panel/NavigationPanel.js"
+- src: "assets/js/app/ui/panel/CurrentTaskPanel.js"
+
+- src: "assets/js/app/taskRunner/ConfirmTaskRunner.js"
+- src: "assets/js/app/taskRunner/PlayAudioTaskRunner.js"
+- src: "assets/js/app/taskRunner/PublishCmdTaskRunner.js"
+- src: "assets/js/app/taskRunner/SleepTaskRunner.js"
+- src: "assets/js/app/taskRunner/TextToSpeechTaskRunner.js"
+
+- src: "assets/js/app/main.js"
+
+- src: "assets/js/app/Extra.js"
+- src: "assets/js/app/EditorUI.js"

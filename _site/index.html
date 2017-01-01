@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+	<title>Task IO | Behrooz Tahanzadeh</title>
+
+	<meta charset="utf-8" />
+	<meta name="description" content="Task runner for ROS based on RosBridge Package"/>
+	<link rel="canonical" href="http://behrooz-tahanzadeh.github.io/task_io/" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="keywords" content="ROS, Robotic, ITECH, ICD, ITKE" />
+	<meta name="author" content="Behrooz Tahanzadeh" />
+	<link rel="author" href="http://b-tz.com"/>
+	<meta property="article:author" content="https://www.facebook.com/behrooz.tahanzadeh" />
+
+	
+	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css">
+	
+	<link rel="stylesheet" href="assets/css/style.css">
+	
+	
+	
+	<script type='text/javascript' src='assets/js/lib/eventemitter2.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/lib/roslib.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/lib/jquery-2.2.3.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/lib/signals.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/lib/annyang.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/lib/file-saver.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/lib/bootstrap.min.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/model/TaskModel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/model/NetworkModel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/model/NodeModel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/model/SettingModel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/ui/list/TasksList.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/ui/list/FileLoaderList.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/ui/panel/EditorPanel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/ui/panel/NavigationPanel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/ui/panel/CurrentTaskPanel.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/taskRunner/ConfirmTaskRunner.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/taskRunner/PlayAudioTaskRunner.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/taskRunner/PublishCmdTaskRunner.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/taskRunner/SleepTaskRunner.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/taskRunner/TextToSpeechTaskRunner.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/main.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/Extra.js'></script>
+	
+	<script type='text/javascript' src='assets/js/app/EditorUI.js'></script>
+	
+</head>
+
+<body data-theme="dark">
+<!-- header -->
+
+<div class="col-sm-8">
+	<div id="fileLoader" class="well well-sm">
+	<h2>Description File</h2>
+	<p>This file should contains all of the network and nodes configurations. The task list can be updated later separately.</p>
+	<input type="file" onchange="FileLoaderList.fileOnChange(event)"/>
+	<button type="button" class="btn btn-warning btn-xs hide">Update</button>
+</div>
+	<div id="networks" class="well well-sm">
+	<h2>Networks</h2>
+	<p>This section contains informations of rosbridge netowrk.</p>
+	
+	<table class="table">
+		<thead>
+			<tr><th>#</th> <th>ID</th> <th>URL</th> <th>Status</th></tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+	<div id="nodes" class="well well-sm">
+	<h2>Nodes</h2>
+	<p>Running target nodes are described here. Each node has its own <code>publish</code> and <code>subscribe</code> topics in ros.</p>
+	
+	<table class="table">
+		<thead>
+			<tr><th>#</th> <th>ID</th> <th>Status</th> <th>Network ID</th> <th>Publish</th> <th>Subscribe</th> <th>Network Status</th></tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+	<div id="tasks" class="well well-sm">
+	<h2>Tasks</h2>
+	<p>Main tasks descriptions.</p>
+
+	<p><button type="button" class="btn btn-warning btn-xs" onclick="jQuery('#tasks table').toggleClass('hide-detail')">Toggle Details</button></p>
+
+	<table class="table">
+		<thead>
+			<tr><th>#</th> <th>Type</th> <th>Title</th> <th class="detail">Param</th> <th class="detail">Generated</th> </tr>
+		</thead>
+		<tbody ondblclick="TasksList.onDbClick(event)">
+			
+		</tbody>
+	</table>
+</div>
+
+	<div class="btn-group">
+		<button type="button" class="btn btn-default btn-xs dark" onclick="jQuery('body').attr('data-theme', 'dark'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap-darkly.min.css')">Dark Theme</button>
+		<button type="button" class="btn btn-default btn-xs bright" onclick="jQuery('body').attr('data-theme', 'bright'); jQuery('link#main_style_sheet').attr('href', 'assets/css/bootstrap.min.css')">Bright Theme</button>
+	</div>
+</div>
+	
+<div class="panel-group" data-spy="affix" style="right:10px; width:33%; top:10px" >
+
+	<div class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#navigationPanel">
+		Navigation
+	</div>
+	
+	<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="navigationPanel">
+		<div class="checkbox">
+			<label><input type="checkbox" value="" id="runAutomaticallyChb">Run Automatically</label>
+		</div>
+		
+		<div style="margin:20px 0px;">
+			<button type="button" class="btn btn-warning btn-xs" onclick="NavigationPanel.removeGeneratedOnClick()">Remove Timestamp</button>
+		</div>
+		
+		<div id="navButtons" class="btn-group">
+			<button type="button" class="btn btn-default prev" onclick="NavigationPanel.prevOnClick()">Prev</button>
+			<button type="button" class="btn btn-primary run" onclick="NavigationPanel.runOnClick()">Run</button>
+			<button type="button" class="btn btn-default next" onclick="NavigationPanel.nextOnClick()">Next</button>
+		</div>
+	</div>
+</div>
+	<div class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" aria-expanded="true" data-target="#currentTaskPanel">
+		Current Task
+	</div>
+	
+	<div class="panel-body panel-collapse collapse in" aria-expanded="true" id="currentTaskPanel">
+		<div style="min-height:100px"></div>
+	</div>
+	
+</div>
+	<div class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" data-target="#publishCommandPanel">
+		Publish Command
+	</div>
+	<div class="panel-body panel-collapse collapse" id="publishCommandPanel">
+		<label>Node:</label>
+		<select class="form-control"></select>
+		<br>
+		<label style="display:block">Command:<input type="text" class="form-control"></label>
+		<button type="button" class="btn btn-warning" onclick="publishCommandPanel_onClick()">Publish</button>
+	</div>
+</div>
+	<div class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" data-target="#editorPanel">
+        Editor
+	</div>
+	<div class="panel-body panel-collapse" id="editorPanel">
+			<label>Type:</label>
+			<select class="form-control" onchange="EditorPanel.typeOnChange()" id="editorPanel_type">
+				<option value="publish_cmd">publish_cmd</option>
+				<option value="sleep">sleep</option>
+				<option value="confirm">confirm</option>
+				<option value="play_audio">play_audio</option>
+				<option value="text_to_speech">text_to_speech</option>
+			</select>
+
+			<div class="editors">
+				<div id="editorPanel_editors_publish_cmd" class="hide">
+					<label style="display:block">node_id:<input type="text" class="form-control" name="node_id"></label>
+					<label style="display:block">wait_for:<input type="text" class="form-control" name="wait_for"></label>
+					<label style="display:block">command:<input type="text" class="form-control" name="command"></label>
+				</div>
+
+				<div id="editorPanel_editors_sleep" class="hide">
+					<label style="display:block">delay_sec:<input type="text" class="form-control" name="delay_sec"></label>
+				</div>
+
+				<div id="editorPanel_editors_confirm" class="hide">
+					<label style="display:block">on_true:<input type="number" class="form-control" name="on_true"></label>
+					<label style="display:block">on_false:<input type="number" class="form-control" name="on_false"></label>
+					<label style="display:block">message:<input type="text" class="form-control" name="message"></label>
+				</div>
+
+				<div id="editorPanel_editors_play_audio" class="hide">
+					<label style="display:block">url:<input type="text" class="form-control" name="url"></label>
+				</div>
+
+				<div id="editorPanel_editors_text_to_speech" class="hide">
+					<label style="display:block">text:<input type="text" class="form-control" name="text"></label>
+				</div>
+			</div>
+
+			<hr>
+			<button type="button" class="btn btn-default" onclick="EditorPanel.addNew()">Add New</button>
+
+			<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
+			
+			<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
+			<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
+	
+  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
+	</div>
+</div>
+	
+</div>
+
+<!-- footer -->
+</body>
+</html>
+<!-- /footer -->
+
+<!-- layout:default -->
