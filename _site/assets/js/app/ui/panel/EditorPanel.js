@@ -32,25 +32,72 @@ class EditorPanel
 
 	static addNew()
 	{
-		var type = EditorPanel.getType();
-		var title = "";
-		var param = EditorPanel.getParam();
-
-		//                    0 #       1 Type    2 Title   3 Param                  4 Generated
-		var jq = jQuery("<tr> <td></td> <td></td> <td></td> <td class='detail'></td> <td class='detail'></td> </tr>");
-
-		//jq.attr("ondblclick", "jQuery('#runAutomaticallyChb').get(0).checked = false; TaskController.taskController.setIndex("+i+")")
-
-		jq.find("td:eq(1)").html(type);
-		jq.find("td:eq(2)").html(title);
-
-		var str = "";
-
-		for (var k in param)
-			str+= "<b>"+k+": </b><span>"+param[k]+"</span><br>";
 		
-		jq.find("td:eq(3)").html(str);
+	}
 
-		jQuery("div#tasks tbody").append(jq);
+
+
+	static moveDownOnClick()
+	{
+		var jq = jQuery("div#tasks tbody>tr.currentTask");
+		
+		if(jq.length <= 0)
+		{
+			console.log("No task has been selected.");
+			return;
+		}
+
+		if(jq.is(':last-child'))
+		{
+			console.log("Can not move lower.");
+			return;
+		}
+
+		var i = jq.index();
+			
+		NavigationPanel.disableAutomatic();
+		
+		jq.detach();
+		jQuery(`div#tasks tbody>tr:eq(${i})`).after(jq);
+		TasksList.renderNumbers();
+	}
+
+
+
+	static moveUpOnClick()
+	{
+		var jq = jQuery("div#tasks tbody>tr.currentTask");
+		
+		if(jq.length <= 0)
+		{
+			console.log("No task has been selected.");
+			return;
+		}
+
+		if(jq.is(':first-child'))
+		{
+			console.log("Can not move higher.");
+			return;
+		}
+
+		var i = jq.index();
+			
+		NavigationPanel.disableAutomatic();
+		
+		jq.detach();
+		jQuery(`div#tasks tbody>tr:eq(${i-1})`).before(jq);
+		TasksList.renderNumbers();
+	}
+
+
+
+	static deleteOnClick()
+	{
+		if(!confirm("Are you sure that you want to delete this task?"))
+			return;
+
+		NavigationPanel.disableAutomatic();
+		jQuery("div#tasks tbody>tr.currentTask").remove();
+		TasksList.renderNumbers();
 	}
 }

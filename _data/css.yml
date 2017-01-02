@@ -1,2 +1,3 @@
 - src: "assets/css/bootstrap-darkly.min.css"
+  id: "main_style_sheet"
 - src: "assets/css/style.css"

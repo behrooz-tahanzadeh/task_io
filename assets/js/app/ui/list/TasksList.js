@@ -9,7 +9,9 @@ class TasksList
 
 	static renderNumbers()
 	{
-
+		const jq = jQuery(`div#tasks tbody>tr`);
+		for(let i=0; i<jq.length; ++i)
+			jq.eq(i).find(`td:eq(0)`).html(i);
 	}
 
 

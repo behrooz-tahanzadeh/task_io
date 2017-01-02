@@ -25,3 +25,8 @@ jQuery(document).ready(function()
 	NodeModel.init();
 	NavigationPanel.init();
 });
+
+window.onbeforeunload = function()
+{
+    return "Are you sure? Unsaved changes will be lost...";
+}

@@ -105,7 +105,7 @@ class NodeModel
 			
 			if(this.status)	
 			{
-				this.statusTopic = new ROSLIB.Topic({ros:this.networkModel.ros , name:this.status});
+				this.statusTopic = new ROSLIB.Topic({ros:this.networkModel.ros, name:this.status, messageType:"task_io/Status"});
 				this.statusTopic.subscribe(this.statusCb.bind(this));
 				console.info("status topic has been prepared. Topic: "+this.status);
 			}

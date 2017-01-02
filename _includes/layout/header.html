@@ -14,7 +14,7 @@
 	<meta property="article:author" content="{{site.data.creator.facebookUrl}}" />
 
 	{% for css in site.data.css %}
-	<link rel="stylesheet" href="{{css.src}}">
+	<link rel="stylesheet" href="{{css.src}}" {% if css.id %}id="{{css.id}}"{% endif %}>
 	{% endfor %}
 	
 	{% for js in site.data.js %}

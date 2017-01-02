@@ -16,6 +16,7 @@
 
 - src: "assets/js/app/ui/panel/EditorPanel.js"
 - src: "assets/js/app/ui/panel/NavigationPanel.js"
+- src: "assets/js/app/ui/panel/PublishCommandPanel.js"
 - src: "assets/js/app/ui/panel/CurrentTaskPanel.js"
 
 - src: "assets/js/app/taskRunner/ConfirmTaskRunner.js"
@@ -25,6 +26,3 @@
 - src: "assets/js/app/taskRunner/TextToSpeechTaskRunner.js"
 
 - src: "assets/js/app/main.js"
-
-- src: "assets/js/app/Extra.js"
-- src: "assets/js/app/EditorUI.js"

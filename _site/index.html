@@ -14,9 +14,9 @@
 	<meta property="article:author" content="https://www.facebook.com/behrooz.tahanzadeh" />
 
 	
-	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-darkly.min.css" id="main_style_sheet">
 	
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/style.css" >
 	
 	
 	
@@ -50,6 +50,8 @@
 	
 	<script type='text/javascript' src='assets/js/app/ui/panel/NavigationPanel.js'></script>
 	
+	<script type='text/javascript' src='assets/js/app/ui/panel/PublishCommandPanel.js'></script>
+	
 	<script type='text/javascript' src='assets/js/app/ui/panel/CurrentTaskPanel.js'></script>
 	
 	<script type='text/javascript' src='assets/js/app/taskRunner/ConfirmTaskRunner.js'></script>
@@ -63,10 +65,6 @@
 	<script type='text/javascript' src='assets/js/app/taskRunner/TextToSpeechTaskRunner.js'></script>
 	
 	<script type='text/javascript' src='assets/js/app/main.js'></script>
-	
-	<script type='text/javascript' src='assets/js/app/Extra.js'></script>
-	
-	<script type='text/javascript' src='assets/js/app/EditorUI.js'></script>
 	
 </head>
 
@@ -214,14 +212,22 @@
 			</div>
 
 			<hr>
-			<button type="button" class="btn btn-default" onclick="EditorPanel.addNew()">Add New</button>
 
-			<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
-			
-			<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
-			<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
-	
-  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.addNew()">
+				<span class="glyphicon glyphicon-save"></span> Add New
+			</button>
+
+			<button type="button" class="btn btn-danger btn-sm" onclick="EditorPanel.deleteOnClick()">
+				<span class="glyphicon glyphicon-remove"></span> Delete
+			</button>
+
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.moveUpOnClick()">
+				<span class="glyphicon glyphicon-chevron-up"></span> Move Up
+			</button>
+
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.moveDownOnClick()">
+				<span class="glyphicon glyphicon-chevron-down"></span> Move Down
+			</button>
 	</div>
 </div>
 	

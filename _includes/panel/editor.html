@@ -39,13 +39,21 @@
 			</div>
 
 			<hr>
-			<button type="button" class="btn btn-default" onclick="EditorPanel.addNew()">Add New</button>
 
-			<button type="button" class="btn btn-danger" onclick="EditorUI.deleteOnClick()">Delete</button>
-			
-			<button type="button" class="btn btn-default" onclick="EditorUI.moveUpOnClick()">Move Up</button>
-			<button type="button" class="btn btn-default" onclick="EditorUI.moveDownOnClick()">Move Down</button>
-	
-  			<button type="button" class="btn btn-warning" onclick="downloadDescFile_onClick()">Download Desc. File (.xml)</button>
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.addNew()">
+				<span class="glyphicon glyphicon-save"></span> Add New
+			</button>
+
+			<button type="button" class="btn btn-danger btn-sm" onclick="EditorPanel.deleteOnClick()">
+				<span class="glyphicon glyphicon-remove"></span> Delete
+			</button>
+
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.moveUpOnClick()">
+				<span class="glyphicon glyphicon-chevron-up"></span> Move Up
+			</button>
+
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.moveDownOnClick()">
+				<span class="glyphicon glyphicon-chevron-down"></span> Move Down
+			</button>
 	</div>
 </div>
