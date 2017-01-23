@@ -5,6 +5,7 @@
 - src: "assets/js/lib/annyang.min.js"
 - src: "assets/js/lib/file-saver.min.js"
 - src: "assets/js/lib/bootstrap.min.js"
+- src: "assets/js/lib/vkbeautify.js"
 
 - src: "assets/js/app/model/TaskModel.js"
 - src: "assets/js/app/model/NetworkModel.js"

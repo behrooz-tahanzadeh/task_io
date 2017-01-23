@@ -104,4 +104,33 @@ class TaskModel
 		this.update();
 		return this;
 	}
+
+	getXml()
+	{
+		//<task type="sleep" title="sleep for 2 seconds">
+			//<param delay_sec="2" />
+		//</task>
+
+		var x = jQuery("<task/>");
+		x.attr("type", this.type);
+		x.attr("title", this.title);
+
+		var p = jQuery("<param></param>");
+		for (var k in this.param)
+			p.attr(k, this.param[k]);
+
+		p.html('h');
+
+		x.append(p);
+
+		var g = jQuery("<generated></generated>");
+		for (var k in this.generated)
+			g.attr(k, this.generated[k]);
+
+		g.html('');
+
+		x.append(g);
+
+		return x;
+	}
 }

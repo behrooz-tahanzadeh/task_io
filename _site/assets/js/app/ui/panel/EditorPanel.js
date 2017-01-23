@@ -113,4 +113,23 @@ class EditorPanel
 		jQuery("div#tasks tbody>tr.currentTask").remove();
 		TasksList.renderNumbers();
 	}
+
+	static saveXmlOnClick()
+	{
+		var r = jQuery("<root/>");
+		var t = jQuery("<tasks/>");
+
+		var jq = jQuery("div#tasks tbody>tr");
+
+		for(var i=0; i<jq.length; ++i)
+		{
+			var x = new TaskModel().initByJQ(jq.eq(i)).getXml();
+			t.append(x)
+		}
+
+		r.append(t);
+
+		var blob = new Blob([vkbeautify.xml(r.get(0).outerHTML)], {type: "text/plain;charset=utf-8"});
+		saveAs(blob, "hello world.xml");
+	}
 }

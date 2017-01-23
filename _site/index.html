@@ -34,6 +34,8 @@
 	
 	<script type='text/javascript' src='assets/js/lib/bootstrap.min.js'></script>
 	
+	<script type='text/javascript' src='assets/js/lib/vkbeautify.js'></script>
+	
 	<script type='text/javascript' src='assets/js/app/model/TaskModel.js'></script>
 	
 	<script type='text/javascript' src='assets/js/app/model/NetworkModel.js'></script>
@@ -185,7 +187,7 @@
 				<option value="text_to_speech">text_to_speech</option>
 			</select>
 
-			<label style="display:block">title:<input type="text" class="form-control" id="editorPanel_title"></label>
+			<label style="display:block">title:<input type="text" class="form-control" name="editorPanel_title" id="editorPanel_title"></label>
 
 			<div class="editors">
 				<div id="editorPanel_editors_publish_cmd" class="hide">
@@ -229,6 +231,10 @@
 
 			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.moveDownOnClick()">
 				<span class="glyphicon glyphicon-chevron-down"></span> Move Down
+			</button>
+
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.saveXmlOnClick()">
+				<span class="glyphicon glyphicon-floppy-save"></span> Save XML
 			</button>
 	</div>
 </div>
