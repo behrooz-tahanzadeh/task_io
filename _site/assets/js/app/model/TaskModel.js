@@ -88,11 +88,19 @@ class TaskModel
 
 
 
-	append()
+	append(index)
 	{
 		//                    0 #       1 Type    2 Title   3 Param                  4 Generated
 		this.jq = jQuery("<tr> <td></td> <td></td> <td></td> <td class='detail'></td> <td class='detail'></td> </tr>");
-		jQuery("div#tasks tbody").append(this.jq);
+		
+		if(index == undefined || index == -1)
+			jQuery("div#tasks tbody").append(this.jq);
+		else
+		{
+			jQuery(`div#tasks tbody>tr:eq(${index})`).after(this.jq);
+			TasksList.renderNumbers();
+		}
+
 		this.update();
 		return this;
 	}

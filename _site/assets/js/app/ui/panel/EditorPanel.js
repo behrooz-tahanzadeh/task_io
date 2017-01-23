@@ -37,11 +37,15 @@ class EditorPanel
 
 	static addNewOnClick()
 	{
+		NavigationPanel.disableAutomatic();
+
 		var t = new TaskModel();
 		t.type = EditorPanel.getType();
 		t.title = EditorPanel.getTitle();
 		t.param = EditorPanel.getParam();
-		t.append();
+		t.append(jQuery("div#tasks tbody>tr.currentTask").index());
+
+		TasksList.setCurrent(t.jq.index());
 	}
 
 

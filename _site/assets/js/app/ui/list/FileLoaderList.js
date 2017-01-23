@@ -87,6 +87,8 @@ class FileLoaderList
 		
 		for(var i=0; i<obj.length; ++i)
 			new TaskModel().initByXML(obj.eq(i)).append();
+
+		TasksList.renderNumbers();
 	}
 
 }
