@@ -24,6 +24,7 @@ jQuery(document).ready(function()
 	NetworkModel.init();
 	NodeModel.init();
 	NavigationPanel.init();
+	PublishCommandPanel.init();
 });
 
 window.onbeforeunload = function()

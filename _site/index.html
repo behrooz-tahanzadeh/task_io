@@ -168,7 +168,7 @@
 		<select class="form-control"></select>
 		<br>
 		<label style="display:block">Command:<input type="text" class="form-control"></label>
-		<button type="button" class="btn btn-warning" onclick="publishCommandPanel_onClick()">Publish</button>
+		<button type="button" class="btn btn-warning" onclick="PublishCommandPanel.publish()">Publish</button>
 	</div>
 </div>
 	<div class="panel panel-default">
@@ -184,6 +184,8 @@
 				<option value="play_audio">play_audio</option>
 				<option value="text_to_speech">text_to_speech</option>
 			</select>
+
+			<label style="display:block">title:<input type="text" class="form-control" id="editorPanel_title"></label>
 
 			<div class="editors">
 				<div id="editorPanel_editors_publish_cmd" class="hide">
@@ -213,7 +215,7 @@
 
 			<hr>
 
-			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.addNew()">
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.addNewOnClick()">
 				<span class="glyphicon glyphicon-save"></span> Add New
 			</button>
 

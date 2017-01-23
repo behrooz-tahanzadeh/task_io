@@ -3,6 +3,7 @@ class NodeModel
 	static init()
 	{
 		NodeModel.List = [];
+		NodeModel.ChangeSignal = new signals.Signal();
 	}
 
 

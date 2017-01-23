@@ -12,6 +12,8 @@
 				<option value="text_to_speech">text_to_speech</option>
 			</select>
 
+			<label style="display:block">title:<input type="text" class="form-control" id="editorPanel_title"></label>
+
 			<div class="editors">
 				<div id="editorPanel_editors_publish_cmd" class="hide">
 					<label style="display:block">node_id:<input type="text" class="form-control" name="node_id"></label>
@@ -40,7 +42,7 @@
 
 			<hr>
 
-			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.addNew()">
+			<button type="button" class="btn btn-default btn-sm" onclick="EditorPanel.addNewOnClick()">
 				<span class="glyphicon glyphicon-save"></span> Add New
 			</button>
 

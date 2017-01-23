@@ -10,6 +10,8 @@ class FileLoaderList
 		reader.readAsText(file);
 	}
 
+	
+
 	static readerOnLoad(e)
 	{
 		var data = e.target.result;
@@ -71,6 +73,8 @@ class FileLoaderList
 		
 		for(var i=0; i<obj.length; ++i)
 			new NodeModel().initByXML(obj.eq(i)).append();
+
+		NodeModel.ChangeSignal.dispatch();
 	}
 
 

@@ -18,6 +18,11 @@ class EditorPanel
 		return param;
 	}
 
+	static getTitle()
+	{
+		return jQuery("#editorPanel_title").val();
+	}
+
 	static typeOnChange()
 	{
 		EditorPanel.render();
@@ -30,9 +35,13 @@ class EditorPanel
 		jQuery("#editorPanel_editors_"+type).removeClass('hide');
 	}
 
-	static addNew()
+	static addNewOnClick()
 	{
-		
+		var t = new TaskModel();
+		t.type = EditorPanel.getType();
+		t.title = EditorPanel.getTitle();
+		t.param = EditorPanel.getParam();
+		t.append();
 	}
 
 
