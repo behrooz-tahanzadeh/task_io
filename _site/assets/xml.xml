@@ -53,7 +53,13 @@
 
 	<task_templates>
 		<task_template id="say_hello">
-			<task type="text_to_speech" text="Hi {name_1}! How is it going?"/>
+			<task type="sleep" title="sleep for {delay} seconds">
+				<param delay_sec="{delay}" />
+			</task>
+
+			<task type="sleep" title="sleep for {delay} seconds">
+				<param delay_sec="{delay}" />
+			</task>
 		</task_template>
 	</task_templates>
 
@@ -62,8 +68,10 @@
 
 	<tasks>
 
-		<task type="sleep" title="sleep for 2 seconds">
-			<param delay_sec="2" />
+
+
+		<task type="template" id="say_hello">
+			<param delay="3"/>
 		</task>
 
 		<task type="confirm" title="confirm openning gripper?"> 
