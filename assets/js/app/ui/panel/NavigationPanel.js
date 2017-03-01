@@ -57,7 +57,7 @@ class NavigationPanel
 
 	static removeGeneratedOnClick()
 	{
-
+		var jq = jQuery("div#tasks tbody>tr.currentTask>td:eq(4)").empty();
 	}
 
 	static isAutomatic()

@@ -36,7 +36,7 @@ class PublishCmdTaskRunner
 
 		console.log(model.generated["command_compiled"]);
 	
-		node.publishTopic.publish(new ROSLIB.Message(cmd));
+		node.publishData(new ROSLIB.Message(cmd));
 	
 		if(!wait_for)
 			this.done()

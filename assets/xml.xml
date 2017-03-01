@@ -15,7 +15,7 @@
 
 	<nodes>
 		<node id="kuka_a" network_id="main">
-			<publish topic="/kuka_a/task_io/goal" />
+			<publish topic="/kuka_a/task_io/goal" repeat="10" repeat_interval="1"/>
 			<subscribe topic="/kuka_a/task_io/feedback" />
 			<status topic="/kuka_a/kuka_io/rsi_interface/status" />
 		</node>

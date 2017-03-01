@@ -32,15 +32,17 @@ class FileLoaderList
 	
 		for(var i=0; i<obj.length; ++i)
 		{
-			var template_id = obj.eq(i).attr('template_id');
-			var template = FileLoaderList.xml.find("task_templates>task_template[id="+template_id+"]").get(0).innerHTML;
-			
-			var attributes = obj.get(i).attributes;
-			
+			var eq = obj.eq(i);
+
+			var id = eq.attr('id');
+			var template = FileLoaderList.xml.find(`task_templates>task_template[id=${id}]`).get(0).innerHTML;
+
+			var attributes = eq.find("param").get(0).attributes;
+
 			for(var j=0; j<attributes.length; ++j)
-				template = template.replace("{"+attributes[j].name+"}",attributes[j].value);
-			
-			obj.eq(i).replaceWith(template);
+				template = template.replace(new RegExp("{"+attributes[j].name+"}", 'g'), attributes[j].value);
+
+			eq.replaceWith(template);
 		}
 	}
 

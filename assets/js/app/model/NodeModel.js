@@ -46,11 +46,17 @@ class NodeModel
 		this.id = xml.attr("id");
 		this.network_id = xml.attr("network_id");
 		this.publish = xml.find("publish").attr("topic");
+		this.publishRepeat = xml.find("publish").attr("repeat");
+		this.publishRepeatInterval = xml.find("publish").attr("repeat_interval");
 		this.subscribe = xml.find("subscribe").attr("topic");
 		this.status = xml.find("status").attr("topic");
 
 		this.networkModel = NetworkModel.GetById(this.network_id);
 		this.networkModel.statusChanged.add(this.prepareTopics.bind(this));
+
+		this.publishRepeatCounter = 0;
+		this.publishRepeatIntervalId = -1;
+		this.lastPublishedData = undefined;
 
 		return this;
 	}
@@ -199,4 +205,36 @@ class NodeModel
 			.removeClass("label-success label-default label-danger label-warning")
 			.addClass(c);
 	}
+
+	publishData(data)
+	{
+		console.log(data);
+		this.publishTopic.publish(data);
+		this.lastPublishedData = data;
+		if(this.publishRepeat != undefined)
+		{
+			if(this.publishRepeatIntervalId != -1)
+				clearInterval(this.publishRepeatIntervalId);
+
+			this.publishRepeatCounter = 0;
+
+			this.publishRepeatIntervalId = setInterval(this.repeatPublish.bind(this), this.publishRepeatInterval);
+		}
+	}
+
+	repeatPublish()
+	{
+		if(this.publishRepeatCounter < this.publishRepeat)
+		{
+			console.log(this.lastPublishedData);
+			this.publishTopic.publish(this.lastPublishedData);
+			this.publishRepeatCounter++;
+		}
+		else
+		{
+			clearInterval(this.publishRepeatIntervalId);
+			this.publishRepeatIntervalId = -1;
+		}
+	}
+
 }
